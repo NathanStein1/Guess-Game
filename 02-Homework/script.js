@@ -70,11 +70,13 @@ answerCardHead.addEventListener("click", function (event) {
     if (event.target == true); {
         currentQIndex++;
         wins++;
+        displayQuestionAnswer();
     }
-     else {
-        currentQIndex++;
-        loss++;
-    }
+    //  else {
+    //     currentQIndex++;
+    //     loss++;
+    //     displayQuestionAnswer();
+    // }
 });
 
 
