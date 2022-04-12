@@ -66,10 +66,18 @@ function displayQuestionAnswer() {
 }
 
 // THIS CODE BREAKS THE GAME
-answerCardHead.addEventListener("click", function () {
-    currentQIndex++
-    console.log(currentQIndex)
-})
+answerCardHead.addEventListener("click", function (event) {
+    if (event.target == true); {
+        currentQIndex++;
+        wins++;
+    }
+     else {
+        currentQIndex++;
+        loss++;
+    }
+});
+
+
 
 // for loop append and create elements for buttons
 // OR if question[0], append or text.content btn1, 2, 3, 4 to reflect correct anwser set. Scalablility
