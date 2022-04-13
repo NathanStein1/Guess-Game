@@ -1,17 +1,26 @@
 var timer = document.querySelector(".timer")
 var start = document.querySelector("#startButton")
-var wins = localStorage.getItem("wins")
-var loss = localStorage.getItem("losses")
+var wins = 0
+var loss = 0
 var questionbox = document.querySelector("#questionbox")
 var questionCardHead = document.querySelector(".questionClass")
 var answerCardHead = document.querySelectorAll(".btn")
+var btn1 = document.querySelector("#btn1")
+var btn2 = document.querySelector("#btn2")
+var btn3 = document.querySelector("#btn3")
+var btn4 = document.querySelector("#btn4")
+var target = btn1, btn2, btn3, btn4
+var currentQIndex = 0;
 
 
-
-
-
-
+// var currentTime= timeLeft GLOBAL? Nested Functions?
 // ---------------------------Code START------------------------------------------
+// List of Tasks:
+// 1. True and false values attributes to answers
+// 2. Drop time on false clicks, this is actually implemented, however, true and false values need to be
+// 2.5. The problem might be I don't understand the code of the function displayQuestionAnswer
+// 3. Store scores on local storage
+// 4. Make new html page to launch to instead of text.content in displayQuestionAnwser function
 
 
 
@@ -30,6 +39,10 @@ function time() {
             clearInterval(timeInterval);
 
         }
+        displayQuestionAnswer();
+        if (correct == false){
+            timeLeft-5
+        }
     }, 1000);
 
 }
@@ -44,18 +57,12 @@ function startgame() {
 }
 
 
-// function sortQuestions() {
-//     randQuestion = qandA.sort(() => Math.random() -.5)
-// }
-
-// function nextQuestion() {
-//     showQuestion(randomQuest[qandAIndex])
-// }
-
-var currentQIndex = 0;
 
 function displayQuestionAnswer() {
     var question = qandA[currentQIndex];
+    if (currentQIndex >= qandA.length) {
+        questionCardHead.textContent="NEED TO GO TO NEW PAGE TO DISPLAY RESULTS AND ENTER SHIT"
+    }
 
     questionCardHead.textContent = question.questions
 
@@ -65,36 +72,33 @@ function displayQuestionAnswer() {
     });
 }
 
-// THIS CODE BREAKS THE GAME
-answerCardHead.addEventListener("click", function (event) {
-    if (event.target == true); {
+
+function checkAnswer() {
+    if (target == true); {
         currentQIndex++;
-        wins++;
         displayQuestionAnswer();
     }
     //  else {
-    //     currentQIndex++;
+    //     
     //     loss++;
     //     displayQuestionAnswer();
     // }
-});
+};
+
+btn1.addEventListener('click', checkAnswer);
+btn2.addEventListener('click', checkAnswer);
+btn3.addEventListener('click', checkAnswer);
+btn4.addEventListener('click', checkAnswer);
 
 
-
-// for loop append and create elements for buttons
-// OR if question[0], append or text.content btn1, 2, 3, 4 to reflect correct anwser set. Scalablility
-// make a bunch of vars for answers, 
-// make one var == true
-// if (true), update score
-// for loop, (i >4,) btn.textcontent = qandA[0].answers
 
 var qandA = [
     {
         questions: 'What is your favorite cheese?',
         answers: [
             { text: "Manchego", correct: true },
-            { text: "Sour Cream", correct: false },
-            { text: "Onion Mix", correct: false },
+            { text: "Gouda", correct: false },
+            { text: "PepperJack", correct: false },
             { text: "Cheddar", correct: false },
         ]
     },
@@ -127,3 +131,17 @@ var qandA = [
     }
 ]
 
+
+
+
+// ---------------------------------------------------CODE ENDS--------------------------
+
+// ----------------------------------------BABBLE BEGINS--------------------
+
+// function sortQuestions() {
+//     randQuestion = qandA.sort(() => Math.random() -.5)
+// }
+
+// function nextQuestion() {
+//     showQuestion(randomQuest[qandAIndex])
+// }
